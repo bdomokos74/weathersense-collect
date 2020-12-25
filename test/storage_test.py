@@ -6,7 +6,13 @@ import azure.functions as func
 
 from blob import storeMeasurement, createBlobName
 import logging
-logging.basicConfig(level=logging.DEBUG)
+
+# Run this way:
+# . .local/devenv.sh
+# python test/storage_test.py
+
+# Uncomment for debugging
+#logging.basicConfig(level=logging.DEBUG)
 
 class TestStorage(unittest.TestCase):
     storageName = os.getenv("STORAGE_ACCOUNT_NAME")

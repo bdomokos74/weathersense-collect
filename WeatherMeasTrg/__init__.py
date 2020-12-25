@@ -12,14 +12,13 @@ def main(event: func.EventHubEvent):
     
     logging.info(msg)
 
-    sensoreId = "default"
-    sensoreId = event.metadata.get("SystemProperties", {}).get("iothub-connection-device-id", None)
-    if sensoreId == None:
+    sensorId = event.metadata.get("SystemProperties", {}).get("iothub-connection-device-id", None)
+    if sensorId == None:
         raise Error("Missing device id")
 
     storageName = os.getenv("STORAGE_ACCOUNT_NAME")
     containerName = os.getenv("BLOB_CONTAINER_NAME")
-    blob_name = blob.createBlobName(sensoreId=sensoreId)
+    blobName = blob.createBlobName(sensorId=sensorId)
 
     blob.storeMeasurement(storageName, containerName, blobName, msg)
     

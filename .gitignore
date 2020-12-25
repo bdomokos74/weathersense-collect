@@ -2,3 +2,5 @@ dev.env
 .local/
 .venv/
 __pycache__/
+
+.python_packages
