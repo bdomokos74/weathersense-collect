@@ -13,7 +13,8 @@ def createRecord(msg):
     temp = msg.get("Temperature", "")
     pressure = msg.get("Pressure", "")
     humidity = msg.get("Humidity", "")
-    return f"{timestamp},{temp},{pressure},{humidity}\n"
+    bat = msg.get("bat", "")
+    return f"{timestamp},{temp},{pressure},{humidity},{bat}\n"
 
 def storeMeasurement(storageName, containerName, blobName, msg):
     credential = DefaultAzureCredential()
