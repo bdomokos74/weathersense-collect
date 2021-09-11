@@ -1,10 +1,12 @@
-import sys, os
+
+
+import sys
 sys.path.append('WeatherMeasTrg')
 
 import unittest
 import azure.functions as func
 
-from blob import storeMeasurement, createBlobName
+from blob import storeMeasurement, createBlobName, storeData
 import logging
 
 # Run this way:
@@ -15,14 +17,15 @@ import logging
 #logging.basicConfig(level=logging.DEBUG)
 
 class TestStorage(unittest.TestCase):
-    storageName = os.getenv("STORAGE_ACCOUNT_NAME")
-    containerName = os.getenv("BLOB_CONTAINER_NAME")
-    blobName = createBlobName(sensorId="s1")
-    
-    def testCreateBlobName(self):
-        msg = {"messageId":16, "Temperature":24.437500}
-        logging.info("blobname: "+self.blobName)
-        storeMeasurement(self.storageName, self.containerName, self.blobName, msg)
-    
+
+    def testStoreData1(self):
+        msg = "{\"messageId\":16, \"Temperature\":24.437500,\"Pressure\":1000,\"Humidity\":56.5}"
+        storeData("s1", msg, False);
+    def testStoreData2(self):
+        msg = "{\"Id\":16, \"t1\":24.437500,\"t2\":25.0,\"p\":1000,\"h\":56.5,\"bat\":2.9}"
+        storeData("s2", msg, False);
+    def testStoreData3(self):
+        msg = "{\"messageId\":16, \"t1\":24.437500,\"p\":1000,\"h\":56.5,\"battery:\":3.3}"
+        storeData("DOIT2", msg, True);
 if __name__ == '__main__':
     unittest.main()
