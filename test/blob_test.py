@@ -25,5 +25,12 @@ class TestStorage(unittest.TestCase):
    def testCreateRecord3(self):
        st = createRecord("{\"t1\": 23.2, \"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"bat\":3.23,\"offset\":0}\n{\"t1\": 23.2,\"t2\": 24.2, \"p\": 936.6, \"h\": 55.9,\"offset\":2000}\n{\"t1\": 21.2,\"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"offset\":4000}\n")
        print(st)
+   def testCreateRecord4(self):
+       st = createRecord("{\"t1\": 23.2, \"p\": 936.6, \"h\": 55.9,\"bat\":3.23,\"offset\":0}\n{\"t1\": 23.2,\"t2\": 24.2, \"p\": 936.6, \"h\": 55.9,\"offset\":2000}\n{\"t1\": 21.2,\"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"offset\":4000}\n")
+       print(st)
+   def testCreateRecord4(self):
+       st = createRecord("{\"id\":4,\"ts\":1633901967,\"t1\":24.33,\"p\":1009.38,\"h\":38.83,\"bat\":0.00}")
+       print(st)
+   
 if __name__ == '__main__':
     unittest.main()

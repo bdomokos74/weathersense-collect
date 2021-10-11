@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from azure.storage.blob import BlobClient
-from azure.identity import DefaultAzureCredential, CredentialUnavailableError
+from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ResourceNotFoundError
 import logging, json
 import sys, os
@@ -45,9 +45,23 @@ def convert(rows):
             t2 = msg.get("t2", "")
             pressure = msg.get("p", "")
             humidity = msg.get("h", "")
-            temp = (t1+t2)/2.0
-            ret.append(f'{(timestamp+timedelta(milliseconds=offset)).isoformat()},{temp:.2f},{pressure:.2f},{humidity:.2f},{bat},{offset},{t1:.2f},{t2:.2f},{mid}\n')
+            temp = t1
+            if isinstance(t2, float):
+                temp = (t1+t2)/2.0
+
+            temp = measToStr(temp)
+            t1 = measToStr(t1)
+            t2 = measToStr(t2)
+            pressure = measToStr(pressure)
+            humidity = measToStr(humidity)
+
+            ret.append(f'{(timestamp+timedelta(milliseconds=offset)).isoformat()},{temp},{pressure},{humidity},{bat},{offset},{t1},{t2},{mid}\n')
     return ret
+
+def measToStr(m):
+    if isinstance(m, float):
+        m = f'{m:.2f}'
+    return m
 
 def createRecord(eventString):
     msgs = eventString.split("\n")
