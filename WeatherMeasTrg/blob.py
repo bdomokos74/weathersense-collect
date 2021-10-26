@@ -58,7 +58,7 @@ def convert(rows):
             if "offset" in msg:
                 ts = (timestamp+timedelta(milliseconds=offset)).isoformat()
             else:
-                ts = datetime.fromtimestamp(msg.get("ts")).strftime('%Y-%m-%d %H:%M:%S')
+                ts = datetime.fromtimestamp(msg.get("ts")).strftime('%Y-%m-%dT%H:%M:%S.%f')
             ret.append(f'{ts},{temp},{pressure},{humidity},{bat},{offset},{t1},{t2},{mid}\n')
     return ret
 
