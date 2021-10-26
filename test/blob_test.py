@@ -25,6 +25,9 @@ class TestStorage(unittest.TestCase):
    def testCreateRecord3(self):
        st = createRecord("{\"t1\": 23.2, \"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"bat\":3.23,\"offset\":0}\n{\"t1\": 23.2,\"t2\": 24.2, \"p\": 936.6, \"h\": 55.9,\"offset\":2000}\n{\"t1\": 21.2,\"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"offset\":4000}\n")
        print(st)
+   def testCreateRecord3_1(self):
+       st = createRecord("{\"t1\": 23.2, \"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"bat\":3.23,\"ts\":1633824291}\n{\"t1\": 23.2,\"t2\": 24.2, \"p\": 936.6, \"h\": 55.9,\"ts\":1633824926}\n{\"t1\": 21.2,\"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"ts\":1633825681}\n")
+       print(st)
    def testCreateRecord4(self):
        st = createRecord("{\"t1\": 23.2, \"p\": 936.6, \"h\": 55.9,\"bat\":3.23,\"offset\":0}\n{\"t1\": 23.2,\"t2\": 24.2, \"p\": 936.6, \"h\": 55.9,\"offset\":2000}\n{\"t1\": 21.2,\"t2\": 25.2, \"p\": 936.6, \"h\": 55.9,\"offset\":4000}\n")
        print(st)

@@ -54,8 +54,12 @@ def convert(rows):
             t2 = measToStr(t2)
             pressure = measToStr(pressure)
             humidity = measToStr(humidity)
-
-            ret.append(f'{(timestamp+timedelta(milliseconds=offset)).isoformat()},{temp},{pressure},{humidity},{bat},{offset},{t1},{t2},{mid}\n')
+            
+            if "offset" in msg:
+                ts = (timestamp+timedelta(milliseconds=offset)).isoformat()
+            else:
+                ts = datetime.fromtimestamp(msg.get("ts")).strftime('%Y-%m-%d %H:%M:%S')
+            ret.append(f'{ts},{temp},{pressure},{humidity},{bat},{offset},{t1},{t2},{mid}\n')
     return ret
 
 def measToStr(m):
