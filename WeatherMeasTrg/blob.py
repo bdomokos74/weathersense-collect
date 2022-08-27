@@ -9,11 +9,11 @@ def storeData(sensorId, msg, testDevice):
     data = msg
     containerName = os.getenv("BLOB_CONTAINER_NAME")
     storageName = os.getenv("STORAGE_ACCOUNT_NAME")
+    
     if testDevice:
         storageName = os.getenv("TEST_STORAGE_ACCOUNT_NAME")
-        data = msg.strip()+'\n'
-    else:
-        data = createRecord(msg)
+
+    data = msg.strip()+'\n'
 
     blobName = createBlobName(sensorId=sensorId)
     client = createClient(storageName, containerName, blobName)
